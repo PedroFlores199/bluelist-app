@@ -11,8 +11,8 @@
 <p align="center">
   <img src="capturas/01-recetas.png" height="260" alt="Recetas">
   <img src="capturas/02-importar-con-ia.png" height="260" alt="Importar recetas con IA">
-  <img src="capturas/03-lista-de-la-compra.png" height="260" alt="Lista de la compra">
   <img src="capturas/04-menu-semanal.png" height="260" alt="Menú semanal">
+  <img src="capturas/03-lista-de-la-compra.png" height="260" alt="Lista de la compra">
   <img src="capturas/05-receta.png" height="260" alt="Ficha de receta">
 </p>
 
