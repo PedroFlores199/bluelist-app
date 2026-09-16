@@ -1,70 +1,69 @@
-# BlueList — recetas y lista de la compra
+# BlueList — recipes and shopping list
 
-> App de recetas y listas de la compra para Android, iOS y relojes, con importación de
-> recetas mediante **IA que se ejecuta en el propio dispositivo**. Publicada en
-> **[Google Play](https://play.google.com/store/apps/details?id=app.bluelist)** y
+> Recipe and shopping list app for Android, iOS and smartwatches, with recipe import
+> handled by **AI that runs on the device itself**. Published on
+> **[Google Play](https://play.google.com/store/apps/details?id=app.bluelist)** and the
 > **[App Store](https://apps.apple.com/es/app/id6780220062)**.
 >
-> Este repositorio es una **presentación del producto**: el código fuente es privado
-> porque la app es comercial (suscripción). Aquí explico qué hace y cómo está construida.
+> This repository is a **product showcase**: the source code is private because the app
+> is commercial (subscription). Here I explain what it does and how it is built.
 
 <p align="center">
-  <img src="capturas/01-recetas.png" height="260" alt="Recetas">
-  <img src="capturas/02-importar-con-ia.png" height="260" alt="Importar recetas con IA">
-  <img src="capturas/04-menu-semanal.png" height="260" alt="Menú semanal">
-  <img src="capturas/03-lista-de-la-compra.png" height="260" alt="Lista de la compra">
-  <img src="capturas/05-receta.png" height="260" alt="Ficha de receta">
+  <img src="screenshots/01-recipes.png" height="260" alt="Recipes">
+  <img src="screenshots/02-ai-import.png" height="260" alt="Importing recipes with AI">
+  <img src="screenshots/04-weekly-menu.png" height="260" alt="Weekly meal plan">
+  <img src="screenshots/03-shopping-list.png" height="260" alt="Shopping list">
+  <img src="screenshots/05-recipe.png" height="260" alt="Recipe detail">
 </p>
 
-## Qué hace
+## What it does
 
-Tu recetario y tu lista de la compra en la misma app.
+Your recipe collection and your shopping list in the same app.
 
-- **Recetas** con foto, tiempo, raciones, ingredientes y pasos; se pueden partir en
-  varias (masa, relleno, salsa) y buscar por nombre o ingrediente.
-- **Importación con IA local**: pegas el enlace de una web de recetas o de un vídeo de
-  YouTube y la app rellena título, foto, ingredientes y pasos. La IA corre dentro del
-  móvil — **Gemini Nano** en Android y **Apple Intelligence** en iOS — así que no hay
-  coste de API por usuario y el texto nunca sale del dispositivo.
-- **Lista de la compra** de un toque desde la receta, catálogo de 340 productos en 14
-  categorías, logos de más de 300 supermercados.
-- **Libros de cocina** y **menú semanal** en calendario.
-- **Tarjetas de fidelización** escaneadas, a pantalla completa y con brillo al máximo.
-- Apps de reloj (**Wear OS** y **watchOS**): listas y tarjetas desde la muñeca.
-- **Premium** (suscripción): sincronización en la nube entre dispositivos y compartir
-  recetas, libros y listas por enlace, con las listas actualizándose **en tiempo real**.
+- **Recipes** with photo, time, servings, ingredients and steps; they can be split into
+  several (dough, filling, sauce) and searched by name or ingredient.
+- **On-device AI import**: you paste the link of a recipe website or a YouTube video and
+  the app fills in title, photo, ingredients and steps. The AI runs inside the phone —
+  **Gemini Nano** on Android and **Apple Intelligence** on iOS — so there is no API cost
+  per user and the text never leaves the device.
+- **Shopping list** one tap away from the recipe, a catalog of 340 products in 14
+  categories, logos for more than 300 supermarkets.
+- **Cookbooks** and a **weekly meal plan** on a calendar.
+- **Loyalty cards** scanned, shown full screen and at maximum brightness.
+- Watch apps (**Wear OS** and **watchOS**): lists and cards from your wrist.
+- **Premium** (subscription): cloud sync across devices and sharing recipes, books and
+  lists by link, with the lists updating **in real time**.
 
-19 idiomas, sin anuncios, y la cuenta se puede borrar con todos sus datos desde la app.
+19 languages, no ads, and the account can be deleted with all its data from the app.
 
-## Cómo está construida
+## How it is built
 
-| Capa | Tecnología |
+| Layer | Technology |
 |---|---|
-| Android | Kotlin, **Jetpack Compose**, Room; IA local con **Gemini Nano** vía ML Kit GenAI |
-| iOS | **SwiftUI nativo e independiente** (no comparte código con Android); IA local con **Apple Foundation Models** |
-| Relojes | Wear OS y watchOS como apps compañeras |
-| Backend | Firebase: Auth, Firestore, Storage, **Cloud Functions** (verificación de compras de Google y Apple, limpieza programada, borrado de cuenta), App Check, Hosting |
-| Web | Landing y páginas de enlaces compartidos (`/join`, `/recipe`, `/cookbook`) en Firebase Hosting |
+| Android | Kotlin, **Jetpack Compose**, Room; on-device AI with **Gemini Nano** through ML Kit GenAI |
+| iOS | **Native, standalone SwiftUI** (shares no code with Android); on-device AI with **Apple Foundation Models** |
+| Watches | Wear OS and watchOS as companion apps |
+| Backend | Firebase: Auth, Firestore, Storage, **Cloud Functions** (verification of Google and Apple purchases, scheduled cleanup, account deletion), App Check, Hosting |
+| Web | Landing page and shared-link pages (`/join`, `/recipe`, `/cookbook`) on Firebase Hosting |
 
-### Decisiones técnicas de las que estoy orgulloso
+### Technical decisions I am proud of
 
-- **IA en el dispositivo, no en la nube.** Empecé con un modelo en la nube y lo apagué:
-  con Gemini Nano y Apple Intelligence la importación es gratis por usuario, funciona sin
-  conexión y no envía datos a ningún sitio. A cambio, hay que tratar bien los móviles que
-  no la soportan: ahí la receta se añade a mano y todo lo demás funciona igual.
-- **Dos apps nativas con paridad.** Android e iOS no comparten código de UI ni de
-  dominio, pero sí el formato de datos: hay tests que verifican que ambas parsean
-  exactamente igual el JSON de las recetas.
-- **Reglas de seguridad probadas.** Las reglas de Firestore y Storage tienen una suite de
-  350 casos que se ejecuta antes de desplegar, para que compartir una lista nunca abra
-  más de lo que debe.
-- **Compras verificadas en servidor.** Google y Apple se validan en Cloud Functions, no
-  en el cliente, y Premium solo se activa cuando el servidor lo confirma.
+- **AI on the device, not in the cloud.** I started with a cloud model and turned it off:
+  with Gemini Nano and Apple Intelligence the import is free per user, works offline and
+  sends no data anywhere. The trade-off is that phones without support still have to be
+  handled properly: on those, the recipe is added by hand and everything else works the same.
+- **Two native apps with parity.** Android and iOS share no UI or domain code, but they
+  do share the data format: there are tests that check that both parse the recipe JSON
+  exactly the same way.
+- **Tested security rules.** The Firestore and Storage rules have a suite of 350 cases
+  that runs before deploying, so that sharing a list never opens up more than it should.
+- **Purchases verified on the server.** Google and Apple are validated in Cloud
+  Functions, not on the client, and Premium is only turned on when the server confirms it.
 
-## Publicación
+## Publishing
 
-Dos tiendas, suscripciones en las dos, fichas en varios idiomas, política de privacidad y
-el mantenimiento posterior: versiones nuevas, fallos reales y usuarios reales.
+Two stores, subscriptions in both, store listings in several languages, a privacy policy
+and the maintenance that comes after: new versions, real bugs and real users.
 
 ---
 
