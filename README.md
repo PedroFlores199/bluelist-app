@@ -8,12 +8,22 @@
 > This repository is a **product showcase**: the source code is private because the app
 > is commercial (subscription). Here I explain what it does and how it is built.
 
+<p align="center"><b>iOS</b></p>
 <p align="center">
-  <img src="screenshots/01-recipes.png" height="260" alt="Recipes">
-  <img src="screenshots/02-ai-import.png" height="260" alt="Importing recipes with AI">
-  <img src="screenshots/04-weekly-menu.png" height="260" alt="Weekly meal plan">
-  <img src="screenshots/03-shopping-list.png" height="260" alt="Shopping list">
-  <img src="screenshots/05-recipe.png" height="260" alt="Recipe detail">
+  <img src="screenshots/ios/01-recipes.png" height="260" alt="Recipes on iOS">
+  <img src="screenshots/ios/02-ai-import.png" height="260" alt="Importing recipes with AI on iOS">
+  <img src="screenshots/ios/04-weekly-menu.png" height="260" alt="Weekly meal plan on iOS">
+  <img src="screenshots/ios/03-shopping-list.png" height="260" alt="Shopping list on iOS">
+  <img src="screenshots/ios/05-recipe.png" height="260" alt="Recipe detail on iOS">
+</p>
+
+<p align="center"><b>Android</b></p>
+<p align="center">
+  <img src="screenshots/android/01-recipes.png" height="260" alt="Recipes on Android">
+  <img src="screenshots/android/02-ai-import.png" height="260" alt="Importing recipes with AI on Android">
+  <img src="screenshots/android/04-weekly-menu.png" height="260" alt="Weekly meal plan on Android">
+  <img src="screenshots/android/03-shopping-list.png" height="260" alt="Shopping list on Android">
+  <img src="screenshots/android/05-recipe.png" height="260" alt="Recipe detail on Android">
 </p>
 
 ## What it does
